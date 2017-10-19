@@ -1,0 +1,128 @@
+(function($){
+  $(function(){
+
+      var sections = {},
+          _height  = $(window).height(),
+          i        = 0,
+          locationOrigin = window.location.origin,
+          pathname = window.location.pathname;
+          pathArr = pathname.split("/");
+          console.log(pathname);
+
+      // Grab positions of our sections
+      $(document).ready(function(){
+
+        // language switch
+        $('#language-switch').appendTo('.menu-wrap');
+        $('#block-block-2').remove();
+
+        // test
+        if ($('body').hasClass('front')) {
+          $('body').append('<div class="testbox testbox-1">Document scrollTop: <span class="num">0</span></div>');
+        }
+
+        var locationHash = window.location.hash;
+        //console.log(locationHash);
+        if (locationHash == "") {
+          $(".menu-nav li:first-child a").addClass("active");
+        }
+        else {
+          locationHash = locationHash.replace(/^.*?(#|$)/,'');
+          $(".menu-nav li").each(function(){
+            $link = $(this).find("a");
+            $linkHref = $link.attr("href");
+
+            if ($linkHref.split("#")[0] == "" || $linkHref.indexOf(locationOrigin) > -1) {
+              $linkHashName = $link.attr('href').replace(/^.*?(#|$)/,'');
+              //console.log($linkHashName);
+              //console.log(locationHash);
+              if (locationHash == $linkHashName) {
+                $(this).addClass("active");
+              }
+            }
+          });
+        }
+
+        // Fix
+        if (pathArr[1] == 'blog' || pathArr[2] == 'blog') {
+          console.log('t');
+          $('.menu-nav li:last-child').addClass('active');
+        }
+        if (pathArr[1] == 'material' || pathArr[2] == 'material') {
+          $('.menu-nav li:nth-child(3)').addClass('active');
+        }
+
+      });
+
+      $(window).load(function(){
+        sectionPos();
+      });
+
+      $(window).resize(function(){
+        sectionPosResize();
+      });
+
+      $(window).scroll(function(){
+          var $this = $(this),
+              pos   = $this.scrollTop();
+
+          // test
+          var $docScroll = $(document).scrollTop();
+          $('.testbox-1 .num').html($docScroll);
+
+
+          for(i in sections){
+              //console.log("i:" + i);
+              if(sections[i] <= pos && sections[i] < pos + _height){
+                  //console.log("i: "+i);
+                  $(".menu-nav li").removeClass('active');
+                  $(".menu-nav li").each(function(){
+                    $link = $(this).find("a");
+                    $linkHref = $link.attr("href");
+
+                    //
+                    if ($linkHref.split("#")[0] == "" || $linkHref.indexOf(locationOrigin) > -1) {
+
+                      $linkHashName = $link.attr('href').replace(/^.*?(#|$)/,'');
+                      //console.log("linkHashName :"+$linkHashName);
+                      //console.log("i: "+i);
+                      if (i == $linkHashName) {
+                        //console.log('match');
+                        $(this).addClass("active");
+                      }
+
+                    }
+
+                  });
+                  //$('.menu-nav li').eq(i).find('a').addClass('active');
+                  //$('#nav_' + i).addClass('active');
+              }
+          }
+      });
+
+    var sectionPos = function() {
+      $('.front-section').each(function(){
+        $sectionName = $(this).attr("name");
+        sections[$sectionName] = $(this).offset().top;
+      });
+
+      $('.flexslider').delay(2000).queue(function( nxt ) {
+        sections['about'] = sections['about'] + $(this).outerHeight();
+        sections['services'] = sections['services'] + $(this).outerHeight();
+        //console.log(sections);
+        nxt();
+      });
+    }
+
+    var sectionPosResize = function() {
+
+      $('.front-section').each(function(){
+        $sectionName = $(this).attr("name");
+        sections[$sectionName] = $(this).offset().top;
+      });
+      //console.log(sections);
+    }
+
+
+  });
+})(jQuery)

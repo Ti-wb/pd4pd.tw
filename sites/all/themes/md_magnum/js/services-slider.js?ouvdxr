@@ -1,0 +1,103 @@
+(function($){
+    // Services slider
+    $(window).load(function(){
+		if ($('.services-slider').length > 0) {
+			$('.services-slider').carouFredSel({
+				circular: false,
+				infinite: false,
+				auto: false,
+				swipe: {
+					onTouch: true,
+					onMouse: false
+				},
+				prev: '.services-prev',
+				next: '.services-next',
+				responsive: true,
+				width: '100%',
+				height: 'variable',
+				scroll: 1,
+				items: {
+					width: 360,
+					height: 'variable',
+					visible: {
+						min: 1,
+						max: 3
+					}
+				}
+			});
+		}
+		if ($('.services-slider-1').length > 0) {
+			$('.services-slider-1').carouFredSel({
+				circular: false,
+				infinite: false,
+				auto: false,
+				swipe: {
+					onTouch: true,
+					onMouse: false
+				},
+				prev: '.services-1-prev',
+				next: '.services-1-next',
+				responsive: true,
+				width: '100%',
+				height: 'variable',
+				scroll: 1,
+				items: {
+					width: 360,
+					height: 'variable',
+					visible: {
+						min: 1,
+						max: 3
+					}
+				}
+			});
+		}
+		if ($('.services-slider-2').length > 0) {
+			$('.services-slider-2').carouFredSel({
+				circular: false,
+				infinite: false,
+				auto: false,
+				swipe: {
+					onTouch: true,
+					onMouse: false
+				},
+				prev: '.services-2-prev',
+				next: '.services-2-next',
+				responsive: true,
+				width: '100%',
+				height: 'variable',
+				scroll: 1,
+				items: {
+					width: 360,
+					height: 'variable',
+					visible: {
+						min: 1,
+						max: 3
+					}
+				}
+			});
+		}
+		if ($('.taxonomy-terms-material-slider').length > 0) {
+			$('.taxonomy-terms-material-slider').carouFredSel({
+				auto: false,
+				swipe: {
+					onTouch: true,
+					onMouse: false
+				},
+				prev: '.taxonomy-terms-material-prev',
+				next: '.taxonomy-terms-material-next',
+				responsive: true,
+				width: '100%',
+				height: 'variable',
+				scroll: 1,
+				items: {
+					width: 360,
+					height: 'variable',
+					visible: {
+						min: 1,
+						max: 3
+					}
+				}
+			});
+		}
+    });
+})(jQuery)
